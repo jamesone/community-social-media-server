@@ -21,10 +21,10 @@ module.exports = {
 	port: "1337",
 	aws: {
 		// host: process.env.RDS_HOSTNAME, //aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com
-		host: 'aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com',
+		host: process.env.RDS_HOSTNAME, //'aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com',
 		user: process.env.RDS_USERNAME,
 		password : process.env.RDS_PASSWORD,
-		port: 3306,
+		port: process.env.RDS_PORT,
 		// password : 'JamesWain3145000',
 		// port: process.env.RDS_PORT,
 		dbName: 'ebdb',

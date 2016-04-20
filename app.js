@@ -24,6 +24,7 @@ app.all('/*', function(req, res, next) {
 
 	// Set custom headers for CORS
 	res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+	res.header("X-powered-by", "SUPRISE MOTHER F***KER");
 	if (req.method == 'OPTIONS') {
 		res.status(200).end();
 	} else {

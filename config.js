@@ -27,7 +27,7 @@ module.exports = {
 		port: process.env.RDS_PORT,
 		// password : 'JamesWain3145000',
 		// port: process.env.RDS_PORT,
-		dbName: 'ebdb',
+		dbName: process.env.RDS_DBNAME ? process.env.RDS_DBNAME : 'ebdb',
 	},
 	// Add models and reference this object everywhere
 	models: {

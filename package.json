@@ -1,0 +1,39 @@
+{
+  "name": "CommunityLocationsApi",
+  "config": {
+    "port": "80",
+    "host": "192.168.0.12"
+  },
+  "version": "1.0.0",
+  "description": "Created by James",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --harmony_destructuring ./bin/www"
+  },
+  "author": "Doug",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "body-parser": "^1.8.3",
+    "crypto-js": "3.1.5",
+    "express": "^4.9.4",
+    "faker": "^3.0.1",
+    "fb": "^1.0.2",
+    "file-type": "3.3.1",
+    "hat": "0.0.3",
+    "ip": "^1.1.2",
+    "jwt-simple": "0.4.0",
+    "morgan": "^1.3.1",
+    "multer": "1.1.0",
+    "mysql": "^2.9.0",
+    "promise": "^7.1.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-native-overlay": "^0.4.2",
+    "request": "2.67.0",
+    "sequelize": "^3.14.2",
+    "sha256": "0.2.0",
+    "string_decoder": "*"
+  }
+}

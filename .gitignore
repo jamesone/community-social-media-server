@@ -1,0 +1,14 @@
+# Compiled source #
+###################
+/node_modules/
+/media/
+/app/views/curl.txt
+/.DS_Store
+/app/.DS_Store
+
+.gitignore
+.elasticbeanstalk/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

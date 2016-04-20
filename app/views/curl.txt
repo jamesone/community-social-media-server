@@ -1,0 +1,20 @@
+# CURL
+- Toggle like/unlike for a post
+	curl -H "Content-Type: application/json" -H "x-access-token: '07132b10b2faf35fd06f66c0ea05c47ec2747a4dbfa758da4522e490b2574207'" -H  "x-key: 'swag'" -X POST -d '{"userId":"1","postId":"50"}' http://localhost:3000/api/v1/post/like
+
+
+#Authentication token:
+- Run in MySql
+- Insert a new token
+	insert into authTokens (userId, token, expired, createdAt, updatedAt) VALUES (1, '07132b10b2faf35fd06f66c0ea05c47ec2747a4dbfa758da4522e490b2574207', 0, '2016-04-11 01:04:00', '2016-04-11 01:04:00');
+
+
+
+#Grab posts
+curl -H "Content-Type: application/json" -H "x-access-token: '07132b10b2faf35fd06f66c0ea05c47ec2747a4dbfa758da4522e490b2574207'" -H  "x-key: 'swag'" -X GET -d  'http://localhost:3000/api/v1/post/'
+
+
+
+## LIVE CURL URL --->
+# Login/register
+curl -H "Content-Type: application/json" -X POST -d '{"userId":"10201729658001612","fb_token":"CAACEdEose0cBALLLQitKTyEZAyDFkDkztCkIK6qtcIrEop08NwZBKSC27drO0yBPkQ0iLg5TqGTQC6y3NvSIsJ1sSExYUwfZCLcf5EW2bGCNBpTPe6IIv08aSGkbwQZBeVrTlAenynRd4owjCQXBcA4fZACZB8pj6HwPL5wY9yUVgbuzVzZBNC86GBphy96wQ7XdK6REZCHrkgZDZD"}' http://community-api-dev.us-west-2.elasticbeanstalk.com/user/login

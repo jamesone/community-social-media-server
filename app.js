@@ -9,7 +9,7 @@ var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json({limit: '50mb'}));
-// app.use('/images', express.static(__dirname + '/app/media/post_photos'));
+app.use('/images', express.static(__dirname + '/media/post_photos'));
 
 // Switch to ngnx later on ...
 app.enable('trust proxy')
@@ -49,30 +49,18 @@ app.use(function(req, res, next) {
 	err.status = 404;
 	next(err);
 });
-// app.set ('port', process.env.PORT || 8081);
 
-console.info ("\n----> Trying to run server | 2");
 // BELOW IS FOR DEV PURPOSES ONLY TO BUILD TEST DATA AND SYNC DATABASE MODELS
 var models = require('./app/models'); // ALl of the models... Synce below
-// const syncModels = true;
-// models.sequelize.sync({'force': syncModels});
+
 
 
 module.exports = app;
 
-// // Change to server.js -> try to deploy, if not go back to app.js #todo
-// var server = app.listen (app.get('port'), function () {
-// 	console.log ("Express server listening on port: " + server.address().port);
-// });
-// otherData ();
-
-
-// // Start the server
-// app.set('port', process.env.PORT || 3000);
 
 // // Debug / add fake data
-var fakeData = true; // Syncs the DB models, do this when you've made changes (it deletes * data too)
-var createData = true; // Creates the fake data when TRUE
+var fakeData = false; // Syncs the DB models, do this when you've made changes (it deletes * data too)
+var createData = false; // Creates the fake data when TRUE
 models.sequelize.sync({'force': fakeData}).then(function () {
 	/*
 		1. create postTypes
@@ -102,12 +90,6 @@ models.sequelize.sync({'force': fakeData}).then(function () {
 		createUser(); // Runs the rest...
 	}
 
-	
-
-	// // Start the server and etc...
-	// var server = app.listen(app.get('port'), function() {
-	// 	console.log('Express server running on '+ ip.address() + ":" +server.address().port);
-	// });
 });
 
 

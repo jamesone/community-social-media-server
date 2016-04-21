@@ -21,13 +21,13 @@ module.exports = {
 	port: "1337",
 	aws: {
 		// host: process.env.RDS_HOSTNAME, //aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com
-		host: process.env.RDS_HOSTNAME, //'aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com',
-		user: process.env.RDS_USERNAME,
-		password : process.env.RDS_PASSWORD,
-		port: process.env.RDS_PORT,
+		host: process.env.RDS_HOSTNAME ? process.env.RDS_HOSTNAME : 'localhost' , //'aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com',
+		user: process.env.RDS_USERNAME ? process.env.RDS_USERNAME : 'root',
+		password : process.env.RDS_PASSWORD ? process.env.RDS_PASSWORD : 'root',
+		port: process.env.RDS_PORT ? process.env.RDS_PORT : 3000,
 		// password : 'JamesWain3145000',
 		// port: process.env.RDS_PORT,
-		dbName: process.env.RDS_DBNAME ? process.env.RDS_DBNAME : 'ebdb',
+		dbName: process.env.RDS_HOSTNAME ? 'ebdb' : 'bbus',
 	},
 	// Add models and reference this object everywhere
 	models: {

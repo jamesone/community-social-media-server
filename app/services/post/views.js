@@ -79,7 +79,7 @@ exports.handleLatestDb = function (posts, data, res) {
 }
 
 var AWS = require('aws-sdk');
-AWS.config.loadFromPath('../../../s3_config.json');
+AWS.config.loadFromPath('../../s3_config.json');
 var s3Bucket = new AWS.S3( { params: {Bucket: 'community-api-content'} } );
 
 exports.handleCreatedPost = function (post, data, res) {

@@ -79,7 +79,7 @@ exports.handleLatestDb = function (posts, data, res) {
 }
 
 var AWS = require('aws-sdk');
-AWS.config.loadFromPath('../../s3_config.json');
+AWS.config.update({accessKeyId: 'AKIAILS7ZHI7PQK532YQ', secretAccessKey: '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', region: 'ap-southeast-2'});
 var s3Bucket = new AWS.S3( { params: {Bucket: 'community-api-content'} } );
 
 exports.handleCreatedPost = function (post, data, res) {

@@ -17,8 +17,8 @@ exports.buildFindAllPostWhere = function (data) {
 
 	where['include'] = [
 		{ model: User  },
-        { model: PostLikes },
-        { model: Comment },
+        // { model: PostLikes },
+        // { model: Comment },
         { model: Locations }, 
 	];
 
@@ -69,18 +69,7 @@ exports.buildFindAllPostWhere = function (data) {
 			];
 		break;
 	}
-	// where['order'] = [
- //    	['createdAt', 'DESC'],
- //    	// ['typeId', 'ASC'],
-	// ];
-	
-	// if (special) {
-	// 	where ['order'] = [
-	// 		[sequelize.literal('no_likes DESC')]
-	// 	]
-	// }
-	console.log (limit);
-	console.log (offset);
+
 	where['limit'] = limit;
 	where['offset'] = offset;
 

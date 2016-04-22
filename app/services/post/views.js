@@ -79,19 +79,21 @@ exports.handleLatestDb = function (posts, data, res) {
 }
 
 var AWS = require('aws-sdk');
-AWS.config.update({accessKeyId: 'AKIAILS7ZHI7PQK532YQ', secretAccessKey: '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', region: 'ap-southeast-2'});
+AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, region: 'ap-southeast-2'});
 var s3Bucket = new AWS.S3( { params: {Bucket: 'community-api-content'} } );
 
 exports.handleCreatedPost = function (post, data, res) {
 		const {photo, photoData,} = data;
-
+		console.log (photoData);
+		console.log (photo);
 		// Upload data to s3
-		buf = new Buffer(photoData.replace(/^data:image\/\w+;base64,/, ""),'base64')
+		buf = new Buffer(photoData.uri.replace(/^data:image\/\w+;base64,/, ""),'base64')
 		var imageData = {
 		    Key: 'public/images/' + photo, 
 		    Body: buf,
 		    ContentEncoding: 'base64',
-		    ContentType: 'image/jpeg'
+		    ContentType: 'image/jpeg',
+		    ACL:'public-read'
 		};
 
 		s3Bucket.putObject(imageData, function(err, data){

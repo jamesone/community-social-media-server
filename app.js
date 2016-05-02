@@ -60,8 +60,8 @@ module.exports = app;
 
 
 // // Debug / add fake data
-const fakeData = true; // Syncs the DB models, do this when you've made changes (it deletes * data too)
-const createData = true; // Creates the fake data when TRUE
+const fakeData = false; // Syncs the DB models, do this when you've made changes (it deletes * data too)
+const createData = false; // Creates the fake data when TRUE
 const types = ['Traffic Jam', 'Terror Alert', 'Speed Camera', 'Medical Emergency', 'Cheap Fuel', 'Other'];
 const locations = ['Victoria', 'NSW', 'QLD', 'South Australia'];
 

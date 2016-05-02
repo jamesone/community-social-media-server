@@ -78,6 +78,7 @@ exports.handleLatestDb = function (posts, data, res) {
 	
 }
 
+const writeLocally = true;
 var AWS = require('aws-sdk');
 AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, region: 'ap-southeast-2'});
 var s3Bucket = new AWS.S3( { params: {Bucket: 'community-api-content'} } );
@@ -86,37 +87,40 @@ exports.handleCreatedPost = function (post, data, res) {
 		const {photo, photoData,} = data;
 		console.log (photoData);
 		console.log (photo);
-		// Upload data to s3
-		buf = new Buffer(photoData.uri.replace(/^data:image\/\w+;base64,/, ""),'base64')
-		var imageData = {
-		    Key: 'public/images/' + photo, 
-		    Body: buf,
-		    ContentEncoding: 'base64',
-		    ContentType: 'image/jpeg',
-		    ACL:'public-read'
-		};
 
-		s3Bucket.putObject(imageData, function(err, data){
-		      if (err) { 
-		        console.log(err);
-		        console.log('Error uploading data: ', data); 
-		      } else {
-		        console.log('succesfully uploaded the image!', photo);
-		      }
-		});
+		if (!writeLocally){
+			// Upload data to s3
+			buf = new Buffer(photoData.uri.replace(/^data:image\/\w+;base64,/, ""),'base64')
+			var imageData = {
+			    Key: 'public/images/' + photo, 
+			    Body: buf,
+			    ContentEncoding: 'base64',
+			    ContentType: 'image/jpeg',
+			    ACL:'public-read'
+			};
 
-
-		// // If file base64 was parsed then save it to server
-		// if(photo != ''){
-		// 	fileWriter(photo, photoData, function(err){
-		// 		if(err){
-		// 			console.log(err);
-		// 			res.json(JSON.stringify({error: "Something has gone wrong, try again.", "post_error": "image was not saved"}))
-		// 			return;
-		// 		}
-		// 		console.info("\nFile saved to server: ", photo)
-		// 	});
-		// }
+			s3Bucket.putObject(imageData, function(err, data){
+			      if (err) { 
+			        console.log(err);
+			        console.log('Error uploading data: ', data); 
+			      } else {
+			        console.log('succesfully uploaded the image!', photo);
+			      }
+			});
+		} else {
+			// // If file base64 was parsed then save it to server
+			if(photo != ''){
+				fileWriter(photo, photoData, function(err){
+					if(err){
+						console.log(err);
+						res.json(JSON.stringify({error: "Something has gone wrong, try again.", "post_error": "image was not saved"}))
+						return;
+					}
+					console.info("\nFile saved to server: ", photo)
+				});
+			}
+		}
+		
 		res.json(JSON.stringify({post, "success": "post created successfully"}));
 }
 

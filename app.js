@@ -5,11 +5,12 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var faker = require('faker'); // Fake data only
 
+
 var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json({limit: '50mb'}));
-app.use('/images', express.static(__dirname + '/media/post_photos'));
+app.use('/photos', express.static(__dirname + '/media/post_photos'));
 
 // Switch to ngnx later on ...
 app.enable('trust proxy')

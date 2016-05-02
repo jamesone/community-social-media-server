@@ -6,7 +6,11 @@ const urls = {
 
 	// Aws
 	// ip: "http://"+ip.address()+":80/api/v1/",
-	ip: "http://community-dev.ap-southeast-2.elasticbeanstalk.com/api/v1/",
+	ip: "community.ap-southeast-2.elasticbeanstalk.com",
+	// ip: "http://localhost:80/api/v1/",
+	// ip: "http://192.168.15.80/api/v1/",
+
+	// ip: "http://community-dev.ap-southeast-2.elasticbeanstalk.com/api/v1/",
 
 	// For home dev
 	// ip: "http://"+ip.address() + ":3000/api/v1/",
@@ -25,8 +29,6 @@ module.exports = {
 		user: process.env.RDS_USERNAME ? process.env.RDS_USERNAME : 'root',
 		password : process.env.RDS_PASSWORD ? process.env.RDS_PASSWORD : 'root',
 		port: process.env.RDS_PORT ? process.env.RDS_PORT : 3000,
-		// password : 'JamesWain3145000',
-		// port: process.env.RDS_PORT,
 		dbName: process.env.RDS_HOSTNAME ? 'ebdb' : 'bbus',
 	},
 	// Add models and reference this object everywhere

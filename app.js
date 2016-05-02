@@ -60,8 +60,11 @@ module.exports = app;
 
 
 // // Debug / add fake data
-var fakeData = false; // Syncs the DB models, do this when you've made changes (it deletes * data too)
-var createData = false; // Creates the fake data when TRUE
+const fakeData = true; // Syncs the DB models, do this when you've made changes (it deletes * data too)
+const createData = true; // Creates the fake data when TRUE
+const types = ['Traffic Jam', 'Terror Alert', 'Speed Camera', 'Medical Emergency', 'Cheap Fuel', 'Other'];
+const locations = ['Victoria', 'NSW', 'QLD', 'South Australia'];
+
 models.sequelize.sync({'force': fakeData}).then(function () {
 	/*
 		1. create postTypes
@@ -73,7 +76,7 @@ models.sequelize.sync({'force': fakeData}).then(function () {
 	*/
 	if (createData){
 		// Create all the postType/s 
-		var types = ['Traffic Jam', 'Terror Alert', 'Speed Camera', 'Medical Emergency', 'Cheap Fuel', 'Other'];
+		
 		for (var x=0; x<types.length; x++) {
 			models.postType.create({
 				name: types[x]
@@ -81,7 +84,7 @@ models.sequelize.sync({'force': fakeData}).then(function () {
 		}
 
 		// Create all the locations
-		var locations = ['Victoria', 'NSW', 'QLD', 'South Australia'];
+		
 		for (var y=0;y<locations.length;y++) {
 			models.locations.create({
 				name: locations[y],
@@ -112,7 +115,7 @@ function createUser () {
 }	
 
 function createPost () {
-	for(var i=1;i<320;i++){
+	for(var i=1;i<120;i++){
 		var userId = Math.floor((Math.random() * 7) + 1);
 		var city = Math.floor((Math.random() * 4) + 1);
 		var typeId = Math.floor((Math.random() * 5) + 1);
@@ -121,8 +124,9 @@ function createPost () {
 		models.post.create({
 			description: `User Id: ${userId} 
 			& Post Id: ${i}
-			& City: ${city}
-			& Type Id: ${typeId}`,
+			& City: ${city}, ${locations[city]}
+			& Type Id: ${typeId}
+			& Type name: ${types[typeId]}`,
 			city: city, // References a state
 			// entityId: 2,
 			location_address: "Melbourne CBD",
@@ -140,7 +144,6 @@ function createPost () {
 			console.log(err);
 			return;
 		});
-
 	}
 
 }
@@ -156,7 +159,6 @@ function createPostLikes (postId) {
 			postId: postId,
 		}).then().catch((err)=>console.log(err))
 	}
-
 }
 
 function createComments (s) {
@@ -174,82 +176,3 @@ function createComments (s) {
 		});
 	}
 }
-
-
-// function otherData () {
-// 	var postidOne = ['Traffic jam on waverly road malvern east, banking up really bad', 
-// 				'Traffic on Freeway all the way from burnley tunnel, to malvern exit',
-// 				'Stay clear of Malvern, traffic everywhere because of accident',
-// 				'Keep clear of burnley tunnel, truck accident inside, only one lane open',
-// 				'Traffic everywhere',
-// 				'Why is there traffic in kew?',
-// 				"traffic, traffic, traffic,",
-// 				'Traffic on Freeway all the way from burnley tunnel, to malvern exit',
-// 				'Stay clear of Malvern, traffic everywhere because of accident',
-// 				'Suprisingly no traffic on freeway at 5PM', 
-// 				'Traffic jam on waverly road Hawthorne rd, banking up', 
-// 				'Why is there traffic in malvern?',
-// 				"traffic, everwhere lol, traffic,",
-// 				'Why is there always traffic on freeway?',
-// 				];
-// var postidTwo = ['Terror alert in city',
-// 				'Stay clear of flinders st station, something bad is going down',
-// 				'Cops everywhere around Flinders street station, stay clear',
-// 				'Siege going down in city cafe, just off burke st',
-// 				'Stay clear of parliament station, something is going down',
-// 				'Siege going down in camberwell cafe',
-// 				'Bad stuff happening ....',
-// 				'Cops everywhere around Flinders street station, stay clear',
-// 				'Terror alert in melbourne',
-// 				'stststts',
-// 				'Siege going down in some random cafe, just off burke st',
-// 				'Stay clear of xxx station, something is going down',
-// 				'Terror alert in some random place',
-// 				'Stay clear of flinders st station, something bad is going down',
-// 				'Cops everywhere around Flinders street station, stay clear',
-// 				];
-// 	// Add in reallllllllish data
-// 	for (var x=0;x<postidTwo.length;x++) {
-// 		// curl -H "Content-Type: application/json" -H "x-access-token:99ff54caff57040ba5654b0e3b1aedfed73da35be2413e783e1be7a885abc1c0" -H "x-key:swag" http://192.168.0.12:3000/api/v1/post/Melbourne/0 | json
-// 		models.post.create({
-// 			description: postidTwo[x],
-// 			city: 1, // References a state
-// 			// entityId: 2,
-// 			location_address: "Melbourne CBD",
-// 			typeId: 2,
-// 			photo: "f63d7eb7de520c5c02d6c30bafd1b997.jpeg",
-// 			longitude: "145.0"+Math.floor((Math.random() * 10000) + 1),
-// 			latitude: "-37.8"+Math.floor((Math.random() * 100000) + 1),
-// 			// createdAt: randomDate()
-// 			userId: 1
-// 		});
-// 	}
-
-// 	for (var y=0;x<postidOne.length;y++) {
-// 		// curl -H "Content-Type: application/json" -H "x-access-token:99ff54caff57040ba5654b0e3b1aedfed73da35be2413e783e1be7a885abc1c0" -H "x-key:swag" http://192.168.0.12:3000/api/v1/post/Melbourne/0 | json
-// 		models.post.create({
-// 			description: postidOne[y],
-// 			city: 1, // References a state
-// 			// entityId: 2,
-// 			location_address: "Melbourne CBD",
-// 			typeId: 1,
-// 			photo: "f63d7eb7de520c5c02d6c30bafd1b997.jpeg",
-// 			longitude: "145.0"+Math.floor((Math.random() * 10000) + 1),
-// 			latitude: "-37.8"+Math.floor((Math.random() * 100000) + 1),
-// 			// createdAt: randomDate()
-// 			userId: 1
-// 		});
-// 	}
-// }
-
-
-
-
-
-
-// function randomDate(start, end, startHour, endHour) {
-//   var date = new Date(+start + Math.random() * (end - start));
-//   var hour = startHour + Math.random() * (endHour - startHour) | 0;
-//   date.setHours(hour);
-//   return date;
-// }

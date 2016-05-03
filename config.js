@@ -6,7 +6,7 @@ const urls = {
 
 	// Aws
 	// ip: "http://"+ip.address()+":80/api/v1/",
-	ip: "community.ap-southeast-2.elasticbeanstalk.com",
+	ip: "community.ap-southeast-2.elasticbeanstalk.com/api/v1/",
 	// ip: "http://localhost:80/api/v1/",
 	// ip: "http://192.168.15.80/api/v1/",
 

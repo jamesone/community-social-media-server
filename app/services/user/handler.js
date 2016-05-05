@@ -24,11 +24,11 @@ var fileType = require('file-type');
 
 user = {
 	loginOrRegister: function(req, res) {
-		const {userId, fb_token,} = req.body; // Grab data needed to verify user login
+		const {fb_token, userId, permissions, applicationID,} = req.body;
 
 		// Grab FB data that belongs to token, if valid create user, then distribute a token back to client.
 		grabFBtokenData(userId, fb_token)
-			.then( (data) => user.createUserAndDispatchToken(data, res))
+			.then( (data) => user.createUserAndDispatchToken(data, fb_token, res))
 			.catch( (err) => {
 				console.log ("\n\nError authenticating Facebook token: ", determineError(err));
 				res.json(JSON.stringify(determineError(err)));
@@ -37,8 +37,8 @@ user = {
 	},
 
 	// Once the FB token has been authenticated, create a new user in our database, & then return a token to the user.
-	createUserAndDispatchToken: function (fbData, res) {
-		Controller.createUser(fbData).spread( (createdUser, created) => {
+	createUserAndDispatchToken: function (fbData, fb_token, res) {
+		Controller.createUser(fbData, fb_token).spread( (createdUser, created) => {
 			console.log(createdUser);
 			console.log(created, "<~ user was created")
 			Controller.createToken(createdUser.userId)

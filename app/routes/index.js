@@ -6,8 +6,8 @@ var Locations = require('../views/city');
 
 var Auth = require('./auth');
 
-router.get('/category', postType.findAll);
-router.get('/cities', Locations.findAll);
+router.get('/find', postType.findAll);
+router.get('/all', Locations.findAll);
 
 
 

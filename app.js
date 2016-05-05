@@ -40,6 +40,8 @@ app.use('/api/v1/post/', require('./app/services/post/index.js'));
 app.use('/api/v1/comments/', require('./app/services/comment/index.js')); 
 app.use('/api/v1/ent/', require('./app/services/entity/index.js')); 
 app.use('/user/', require('./app/services/user/index.js')); 
+app.use('/category/', require('./app/routes/index.js')); 
+app.use('/cities/', require('./app/routes/index.js')); 
 
 // app.use('/user/*', require('./app/services/user/')); 
 app.use('/api/v1/', require('./app/routes')); // TEMP UNTIL I IMPLEMENT OWN MICROSERVICE
@@ -80,7 +82,7 @@ models.sequelize.sync({'force': fakeData}).then(function () {
 		for (var x=0; x<types.length; x++) {
 			models.postType.create({
 				name: types[x]
-			});
+			});	
 		}
 
 		// Create all the locations

@@ -5,7 +5,7 @@ var Token = Models.authTokens;
 var CryptoJS = require("crypto-js");
 var hat = require('hat');
 
-exports.createUser = function (data){
+exports.createUser = function (data, fb_token){
 	// Create the user and return access token
 	return User.findOrCreate({
 		where: {
@@ -15,18 +15,18 @@ exports.createUser = function (data){
 			name: data.name,
 			fbId: data.id,
 			email: data.email,
-			authKey: "$$$Ddjjdafjjadsfjadsjfjadfsj2", // Probs will be removed? no need just gonna leave for now.
+			authKey: fb_token // Probs will be removed? no need just gonna leave for now.
 		},
-		attributes: ['userId', 'name', 'email', 'profilePic'],
+		attributes: ['userId', 'name', 'email', 'profilePic', 'authKey'], // Pass down fb_token
 	});
 }
 
 exports.createToken = function (userId) {
 	// User has already been created now create an authToken and return it to CB
-		return Token.create({ 
-			userId: userId,
-			token: genToken()
-		});
+	return Token.create({ 
+		userId: userId,
+		token: genToken() // Used to authenticate on our server
+	});
 }
 
 function genToken() {

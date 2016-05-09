@@ -27,7 +27,7 @@ post = {
 		// Split up types into an array
 		const typeIds = typeof q.types != 'undefined' && q.types  ? q.types.split(',') : [];
 		const typesarray = arrayify(typeIds);
-		const special = q.special;
+		const filter = q.filter;
 		const userId = q.userId ? q.userId : null;
 
 		// Grab all possible data && assign defaults
@@ -37,7 +37,7 @@ post = {
 			offset: q.offset ? parseInt(q.offset) : 0,
 			types: typesarray,  // Split into arrray  and slice last index (a comma) 
 			typeIds: q.types,
-			special: special ? special : null,
+			special: filter ? filter : null,
 			typeIdArray: typeIds,
 			latestId: q.latestId ? q.latestId : 0,
 			longitude: q.longitude ? q.longitude : null,

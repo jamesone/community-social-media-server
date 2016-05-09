@@ -8,7 +8,6 @@ router.get('/:city/', Handler.findAll);
 // POST
 router.post('/', Handler.createPost);
 router.post('/like', Handler.togglePostLike);
-// router.post('/like/:postId', Handler.likePost);
 
 
 module.exports = router;

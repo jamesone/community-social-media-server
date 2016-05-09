@@ -6,7 +6,7 @@ var Locations = Models.locations;
 var User = Models.user;
 var PostLikes = Models.postLikes;
 var sequelize = Models.sequelize;
-
+var {postUserCols,} = require('./controller')
 // specials = chronological, likes
 /**
 * Add in all sequelize queries here! Export an object for each function
@@ -16,7 +16,7 @@ exports.buildFindAllPostWhere = function (data) {
 	var where = {};
 
 	where['include'] = [
-		{ model: User  },
+		{ model: User, attributes: postUserCols  },
         // { model: PostLikes },
         // { model: Comment },
         { model: Locations }, 

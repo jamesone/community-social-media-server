@@ -21,6 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     }, 
+    // Facebook token for sharing and etc...
     authKey: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,7 +33,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     profilePic: {
       type: DataTypes.STRING,
-      defaultValue: "default.png"
+      defaultValue: "default.jpeg"
+    },
+    coverPic: {
+      type: DataTypes.STRING,
+      defaultValue: "defaultCover.jpeg"
     }
   }, {
     classMethods: {

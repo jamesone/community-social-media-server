@@ -6,6 +6,10 @@ var CryptoJS = require("crypto-js");
 var hat = require('hat');
 
 exports.createUser = function (data, fb_token){
+	const {picture, cover,} = data;
+	console.log (picture.data.url, "<!!~~~ PICTURE <~~~~~!!");
+	console.log (cover.source, "<!!~~~ COVER <~~~~~!!");
+
 	// Create the user and return access token
 	return User.findOrCreate({
 		where: {
@@ -14,11 +18,26 @@ exports.createUser = function (data, fb_token){
 		defaults: {
 			name: data.name,
 			fbId: data.id,
+			profilePic: picture.data.url,
+			coverPic: cover.source,
 			email: data.email,
-			authKey: fb_token // Probs will be removed? no need just gonna leave for now.
+			authKey: fb_token,
 		},
-		attributes: ['userId', 'name', 'email', 'profilePic', 'authKey'], // Pass down fb_token
+		attributes: ['userId', 'name', 'email', 'profilePic', 'authKey', 'coverPic'], // Pass down fb_token
 	});
+}
+
+exports.updateUser = (fbData, userId, fb_token) => {
+	return User.update({
+		name: fbData.name,
+		fbId: fbData.id,
+		profilePic: fbData.picture.data.url,
+		coverPic: fbData.cover.source,
+		email: fbData.email,
+		authKey: fb_token,
+	},
+	{where: {userId: userId}}
+); //.success( ()=> user.createTokenForUser (createdUser.userId))
 }
 
 exports.createToken = function (userId) {

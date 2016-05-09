@@ -8,6 +8,7 @@ var User = Models.user;
 var PostLikes = Models.postLikes;
 var sequelize = Models.sequelize;
 const {buildFindAllPostWhere,} = require('./builder');
+const postUserCols = ['userId', 'fbId', 'profilePic', 'coverPic', 'name', 'createdAt'];
 
 exports.findAllDb = function(data){
 	const where = buildFindAllPostWhere(data);
@@ -24,7 +25,7 @@ exports.findByCoords = function (data) {
 		longitude: longitude,
 		latitude: latitude,
 		include: [
-			{ model: User  },
+			{ model: User, attributes: postUserCols },
 	        // { model: PostLikes },
 	        // { model: Comment },
 	        { model: Locations }, // #TODO: weird error causing WHERE 0 = type IDHERE IF COMMENTED OUT IT FIXES
@@ -66,7 +67,7 @@ exports.findLatest =  function(data){
 	const {city, typeIds, latestId,} = data;
 	Post.findAll({
 		include: [
-            { model: User  },
+            { model: User, attributes: postUserCols  },
             { model: Locations }
         ],
         where:

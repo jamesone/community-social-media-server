@@ -14,7 +14,7 @@ var Sequelize = require('sequelize');
 var hat = require('hat');
 var fileType = require('file-type');
 
-
+// TURN INTO A CLASS....ALL OVER THE PLACE
 /**
 	Handler dispatches controllers which insert data into database, controllers return promises, END promises are 
 	handled by views. By end I mean the last promise in the stack...e.g when creating a user we need to grab FB token,
@@ -39,12 +39,19 @@ user = {
 	// Once the FB token has been authenticated, create a new user in our database, & then return a token to the user.
 	createUserAndDispatchToken: function (fbData, fb_token, res) {
 		Controller.createUser(fbData, fb_token).spread( (createdUser, created) => {
-			console.log(createdUser);
-			console.log(created, "<~ user was created")
-			Controller.createToken(createdUser.userId)
-			.then ((token) => returnLogin(token, createdUser, res)) 
-			.catch((err) => res.json(JSON.stringify(determineError(err))))
-		});
+			// If created, then update details....
+			if (!created) {
+				Controller.updateUser(fbData, createdUser.userId, fb_token).then (() => user.createTokenForUser (createdUser, res));
+			} else 
+				user.createTokenForUser (createdUser, res);
+		}).catch ( (error) => {
+			console.log ("ERROR creating user", error)
+		})
+	},
+	createTokenForUser: function(createdUser, res) {
+		Controller.createToken(createdUser.userId)
+		.then ((token) => returnLogin(token, createdUser, res)) 
+		.catch((err) => res.json(JSON.stringify(determineError(err))))
 	}
 }
 

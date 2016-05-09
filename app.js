@@ -133,7 +133,7 @@ function createPost () {
 			// entityId: 2,
 			location_address: "Melbourne CBD",
 			typeId: typeId,
-			photo: "f63d7eb7de520c5c02d6c30bafd1b997.jpeg",
+			photo: "",
 			longitude: "145.0"+Math.floor((Math.random() * 10000) + 1),
 			latitude: "-37.8"+Math.floor((Math.random() * 100000) + 1),
 			// createdAt: randomDate()

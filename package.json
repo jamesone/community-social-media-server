@@ -8,7 +8,7 @@
   "description": "Created by James",
   "main": "app.js",
   "scripts": {
-    "start": "node --harmony_destructuring bin/www"
+    "start": "node  bin/www"
   },
   "author": "Doug",
   "license": "ISC",

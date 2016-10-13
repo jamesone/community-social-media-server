@@ -2,7 +2,8 @@ var ip = require('ip');
 
 const urls = {
 	// Home url
-	home: "http://192.168.0.12:3000/api/v1/",
+	// home: "http://192.168.0.12:3000/api/v1/",
+	home: "http://localhost:3000/api/v1/",
 
 	// Aws
 	// ip: "http://"+ip.address()+":80/api/v1/",

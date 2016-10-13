@@ -5,13 +5,8 @@ const urls = {
 	// home: "http://192.168.0.12:3000/api/v1/",
 	home: "http://localhost:3000/api/v1/",
 
-	// Aws
-	// ip: "http://"+ip.address()+":80/api/v1/",
-	// ip: "http://www.community.ap-southeast-2.elasticbeanstalk.com/api/v1/",
 	ip: "http://localhost:80/api/v1/",
 	// ip: "http://192.168.15.80/api/v1/",
-
-	// ip: "http://community-dev.ap-southeast-2.elasticbeanstalk.com/api/v1/",
 
 	// For home dev
 	// ip: "http://"+ip.address() + ":3000/api/v1/",
@@ -25,8 +20,7 @@ module.exports = {
 	host: "au-cdbr-azure-east-a.cloudapp.net",
 	port: "1337",
 	aws: {
-		// host: process.env.RDS_HOSTNAME, //aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com
-		host: process.env.RDS_HOSTNAME ? process.env.RDS_HOSTNAME : 'localhost' , //'aapv1ovgex4f8f.cwqwezumpe0r.us-west-2.rds.amazonaws.com',
+		host: process.env.RDS_HOSTNAME ? process.env.RDS_HOSTNAME : 'localhost' , 
 		user: process.env.RDS_USERNAME ? process.env.RDS_USERNAME : 'root',
 		password : process.env.RDS_PASSWORD ? process.env.RDS_PASSWORD : 'root',
 		port: process.env.RDS_PORT ? process.env.RDS_PORT : 3000,

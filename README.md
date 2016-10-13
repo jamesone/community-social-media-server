@@ -1,5 +1,7 @@
 # community-social-media-server
-Users report locations certain things, for example, a medical emergency! This is the backend for the community-social-media-app:
+Users report locations for certain things. E.g a medical emergency or a traffic jam!
+
+This is the backend for the community-social-media-app:
 
 https://github.com/jamesone/community-social-media-app
 
